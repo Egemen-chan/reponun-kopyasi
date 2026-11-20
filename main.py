@@ -30,7 +30,13 @@ run = True
 while run:  #as long as the run variable is true, the code will keep executing itself in a loop. brief moment --> forever
     clock.tick(60)
 
-     #enemyleri ekrana veriyoruz burada
+    #burada arkaplan rengi ekledim, bir de bu olmazsa karakter hareket ettikçe eski halleri ekranı kaplıyor >~<
+    screen.fill("goldenrod4")
+    
+    #artık bütün düşmanları hareket ettirecek method ile hareketi sağlayabiliriz ^_^
+    enemy_group.update()
+    
+    #enemyleri ekrana yansıtıyoruz burada artık :3
     enemy_group.draw(screen)
     
     # to keep the loop from being stuck in forever, we use an event handler.
