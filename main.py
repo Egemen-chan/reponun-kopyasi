@@ -13,6 +13,8 @@ screen = pg.display.set_mode((500,500))
 #then we change the name of our window
 pg.display.set_caption("Tower Defense")
 
+enemy_image = pg.image.load
+
 
 run = True
 while run:  #as long as the run variable is true, the code will keep executing itself in a loop. brief moment --> forever
