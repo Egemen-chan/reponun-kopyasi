@@ -7,4 +7,5 @@ class Enemy(pg.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.center = pos
 
-
+    def move(self):
+        self.rect.x += 1
