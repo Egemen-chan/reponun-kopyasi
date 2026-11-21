@@ -23,10 +23,10 @@ enemy_group = pg.sprite.Group()
 
 #şimdi waypointler için bir liste oluşturuyoruz. içerisinde koordinat tuple'ları olan bir liste oluyor bu.
 waypoints = [
-    (100,100)
-    (400,200)
-    (400,100)
-    (200,300)
+    (100,100),
+    (400,200),
+    (400,100),
+    (200,300),
 ] #waypoint'leri visualiselamak için ekrana çizeceğiz sanırım.
 
 #ilk enemy'i yaptık ve onu enemy_group grubuna ekledik
