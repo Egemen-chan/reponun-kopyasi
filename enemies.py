@@ -4,10 +4,6 @@ import pygame as pg
 from pygame.math import Vector2 #modülü importladık. sonra self.pos'u bunu içerisine attık. 
 #normalde bu class pos variable'ı için x-y koordinatları bekliyor, biz ise waypoints listesini gönderdik.
 #o yüzden güncellememiz lazım burayı.
-#şu anda kodu çalıştırınca ilk iki nokta arası çizgiyi ilerleyip hedef noktaya tam vardığında takılı kalıyor. durmuyor, takılı kalıyor, garip bir şey
-#bunun sebebinin yolun sonuna geldiğimizde postion-target arası mesafenin hızımızdan(/adımımızdan) küçük olması olduğunu söyledi. 
-#mesafe için fazla büyük bir adım atmaya çalışıp takılı kalıyor kısacası.
-#bu yüzden enemy hareket ettikçe ne kadar mesafe kaldığını hesaplayıp ona göre adım ayarlamamızı, böylece fazla büyük adımların enemy'i takılı kaldırmayacağını söyledi.
 class Enemy(pg.sprite.Sprite): #burada enemy class'ımızı tanımlıyoruz, ayrıca enemy'lerin sprite sayılması için pygame'in sprite class'ından inheritance da aldık
     def __init__(self, waypoints, image):
         pg.sprite.Sprite.__init__(self)
@@ -26,6 +22,9 @@ class Enemy(pg.sprite.Sprite): #burada enemy class'ımızı tanımlıyoruz, ayr�
         self.target = Vector2(self.waypoints[self.target_waypoint]) #hedefimiz = waypointsteki istediğimiz indexe sahip eleman demiş olduk :D 
         #şimdi bir current position, bir de target position diye iki variableımız var. 
         self.movement = self.target - self.pos #bu iki variableın arasındaki mesafeyi belirlemiş olduk.
+        #calculate distance to target so that fazla büyük adımlar hareketin sonunda buga sokmasın.
+        dist = self.movement.length() #movement aslında bir vektör, biz de onun uzunluğunu almış olduk.
+        print(dist) #test ediyorum bi dk
         self.pos += self.movement.normalize() * self.speed #adım büyüklüğünü speed'le çarptık ki o hızda gitsin.
         self.rect.center = self.pos #self.rect'i de güncellemiş olduk.
         #artık enemy ekranın bir ucundan diğerine gitmeyeceği için x += 1 kısmını sildik. sorry Egemen :D 
