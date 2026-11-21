@@ -16,11 +16,12 @@ screen = pg.display.set_mode((500,500))
 #then we change the name of our window
 pg.display.set_caption("Tower Defense")
 
-enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha()
+enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha() #bunun amacı enemy oluşturduğumuz zaman ekrana vereceğimiz image'ı koda tanıtmak
 
 #burada group üretiyoruz enemyler için
 enemy_group = pg.sprite.Group()
 
+#ilk enemy'i yaptık ve onu enemy_group grubuna ekledik
 enemy = Enemy((200,300), enemy_image)
 enemy_group.add(enemy)
 
@@ -43,10 +44,10 @@ while run:  #as long as the run variable is true, the code will keep executing i
     for event in pg.event.get():
         #quit program
         if event.type == pg.QUIT:
-            run = False #now, whenever we press x the window can be closed. it won't stay open forever and ever.
+            run = False #now, whenever we press x the window can be closed. it won't stay open forever and ever. 
             
-    #güncellemeleri ekranda gösteriyoruz
-    pg.display.flip()    
+    pg.display.flip() #güncellemeleri ekranda gösteriyoruz  
+    
 pg.quit() #bunu neden yaptığımızı anlamadım, bu satırı yazmadan önce de pencere açılıyordu ve kapat deyince kapanıyordu? :PP
 
 #next thing we need to do is limiting the framerate, meaning it should run at 
