@@ -21,6 +21,14 @@ enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha() #bunun
 #burada group üretiyoruz enemyler için
 enemy_group = pg.sprite.Group()
 
+#şimdi waypointler için bir liste oluşturuyoruz. içerisinde koordinat tuple'ları olan bir liste oluyor bu.
+waypoints = [
+    (100,100)
+    (400,200)
+    (400,100)
+    (200,300)
+] #waypoint'leri visualiselamak için ekrana çizeceğiz sanırım.
+
 #ilk enemy'i yaptık ve onu enemy_group grubuna ekledik
 enemy = Enemy((200,300), enemy_image)
 enemy_group.add(enemy)
@@ -33,6 +41,10 @@ while run:  #as long as the run variable is true, the code will keep executing i
 
     #burada arkaplan rengi ekledim, bir de bu olmazsa karakter hareket ettikçe eski halleri ekranı kaplıyor >~<
     screen.fill("goldenrod4")
+
+    #draw enemy path
+    pg.draw.lines(screen, "grey0", False, waypoints) #nereye çizdiğimiz, rengi, son argüman waypoints listesini çiziyor oluşumuz.
+    # (üçüncü argüman da içi kapalı bir şekil olup olmadığını soruyor.  çizgi olduğu için False.)
     
     #artık bütün düşmanları hareket ettirecek method ile hareketi sağlayabiliriz ^_^
     enemy_group.update()
