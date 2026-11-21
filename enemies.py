@@ -1,11 +1,7 @@
 import pygame as pg
-#şimdi enemy'mizin çizgileri takip etmesi için belli bir açı da yapıyor olması lazım. 
-#bu işi kolaylaştırmk için vector2 adında bir modül kullanacağız.
-from pygame.math import Vector2 #modülü importladık. sonra self.pos'u bunu içerisine attık. 
-#normalde bu class pos variable'ı için x-y koordinatları bekliyor, biz ise waypoints listesini gönderdik.
-#o yüzden güncellememiz lazım burayı.
+from pygame.math import Vector2 #bu modülü, enemy'mizin çizgileri takip etmesini yazmayı kolaylaştırmak için importladık.
 class Enemy(pg.sprite.Sprite): #burada enemy class'ımızı tanımlıyoruz, ayrıca enemy'lerin sprite sayılması için pygame'in sprite class'ından inheritance da aldık
-    def __init__(self, waypoints, image):
+    def __init__(self, waypoints, image): #normalde pos variable'ı bekliyordu bu class, waypoints kullanabilmek için içini güncelledik.
         pg.sprite.Sprite.__init__(self)
         self.waypoints = waypoints
         self.pos = Vector2(self.waypoints[0]) #burada waypoints'i baştaki pos variable'ımızı extractlemek için kullandığımızı söyledi.
@@ -15,15 +11,16 @@ class Enemy(pg.sprite.Sprite): #burada enemy class'ımızı tanımlıyoruz, ayr�
         self.speed = 2 #ileride farklı enemy türleri için farklı farklı hızlar yapacağımız bir speed variable'ı ekledik.
         self.image = image
         self.rect = self.image.get_rect()
-        self.rect.center = self.pos #rect'in center'ına self.pos atadık. 
+        self.rect.center = self.pos 
 
     def move(self): #burada enemy'nin hareket etmesini sağlayan method var, x ekseninde tick başına 1 piksel ilerliyor bu sayede #ARTIK YOK DFJKGNLSKDJFNLSD
-        #şimdi bu methodun içine hedef waypoint tanımlayacağız.
-        self.target = Vector2(self.waypoints[self.target_waypoint]) #hedefimiz = waypointsteki istediğimiz indexe sahip eleman demiş olduk :D 
-        #şimdi bir current position, bir de target position diye iki variableımız var. 
-        self.movement = self.target - self.pos #bu iki variableın arasındaki mesafeyi belirlemiş olduk.
-        #calculate distance to target so that fazla büyük adımlar hareketin sonunda buga sokmasın.
-        dist = self.movement.length() #movement aslında bir vektör, biz de onun uzunluğunu almış olduk.
+        if self.target_waypoint < len(self.waypoints): #burada diyoruz ki gidilebilecek waypoint kaldığı sürece gideriz. (zaten öyle yapmıyor muyduk a)
+            self.target = Vector2(self.waypoints[self.target_waypoint])  
+            self.movement = self.target - self.pos 
+        else: #tamam anladım özür dilerim russ.
+            #enemy has reached the end of the path
+            self.kill() #sprite'ı silmeye yarayan bir method bu da.
+        dist = self.movement.length()
         #check if remaining distance is greter than enemy speed
         if dist >= self.speed: #bu normalde olması gereken koşulumuz. dolayısıyla normal hareketimizi bunun içine attık.
             self.pos += self.movement.normalize() * self.speed #adım büyüklüğünü speed'le çarptık ki o hızda gitsin.
@@ -34,6 +31,8 @@ class Enemy(pg.sprite.Sprite): #burada enemy class'ımızı tanımlıyoruz, ayr�
             #şimdi çizgi sonuna gelmiş enemy'mizin targetini diğer waypoint yapıyoruz.
             self.target_waypoint += 1
         self.rect.center = self.pos #self.rect'i de güncellemiş olduk.
+        #şimdi bu sefer de waypointleri bitirdiği zaman valueerror yiyoruz T-T hayat çok güzel
+        #bunu önlemek için de yeterince waypoint'imizin mevcut olduğundan emin olmamız lazımmış.
         #artık enemy ekranın bir ucundan diğerine gitmeyeceği için x += 1 kısmını sildik. sorry Egemen :D 
    
 
