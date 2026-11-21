@@ -24,8 +24,11 @@ class Enemy(pg.sprite.Sprite): #burada enemy class'ımızı tanımlıyoruz, ayr�
         self.movement = self.target - self.pos #bu iki variableın arasındaki mesafeyi belirlemiş olduk.
         #calculate distance to target so that fazla büyük adımlar hareketin sonunda buga sokmasın.
         dist = self.movement.length() #movement aslında bir vektör, biz de onun uzunluğunu almış olduk.
-        print(dist) #test ediyorum bi dk
-        self.pos += self.movement.normalize() * self.speed #adım büyüklüğünü speed'le çarptık ki o hızda gitsin.
+        #check if remaining distance is greter than enemy speed
+        if dist >= self.speed: #bu normalde olması gereken koşulumuz. dolayısıyla normal hareketimizi bunun içine attık.
+            self.pos += self.movement.normalize() * self.speed #adım büyüklüğünü speed'le çarptık ki o hızda gitsin.
+        else:
+            self.pos += self.movement.normalize() * dist #eğer adımdan az kaldıysa direkt distance'ı gideceği şekilde kodladık.
         self.rect.center = self.pos #self.rect'i de güncellemiş olduk.
         #artık enemy ekranın bir ucundan diğerine gitmeyeceği için x += 1 kısmını sildik. sorry Egemen :D 
 
