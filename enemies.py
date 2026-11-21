@@ -21,7 +21,8 @@ class Enemy(pg.sprite.Sprite): #burada enemy class'ımızı tanımlıyoruz, ayr�
         self.target = Vector2(self.waypoints[self.target_waypoint]) #hedefimiz = waypointsteki istediğimiz indexe sahip eleman demiş olduk :D 
         #şimdi bir current position, bir de target position diye iki variableımız var. 
         self.movement = self.target - self.pos #bu iki variableın arasındaki mesafeyi belirlemiş olduk.
-        print(self.movement) #bunun yaptığı şey kodu çalıştırınca terminalde iki waypoint arası mesafeyi bastırmak T-T
+        print(self.movement.normalize()) #Vector2'den gelen normalize methodunu ekledik. artık ekrana bastırılan variable'lar değişti. 
+        #sanırım işin trigonometri kısmını halletmiş olduk.
         #artık enemy ekranın bir ucundan diğerine gitmeyeceği için x += 1 kısmını sildik. sorry Egemen :D 
 
     def update(self): #burada update diye bir method ekledim, hareket methodunu çağırmak için kullanılıyor
