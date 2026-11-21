@@ -30,7 +30,9 @@ waypoints = [
 ] #waypoint'leri visualiselamak için ekrana çizeceğiz sanırım.
 
 #ilk enemy'i yaptık ve onu enemy_group grubuna ekledik
-enemy = Enemy((200,300), enemy_image)
+
+#şimdi artık enemy'lerimizin oluşturduğumuz waypoint'leri takip etmelerini sağlamamız lazım.
+enemy = Enemy(waypoints, enemy_image) #manuel olarak yazdığımız koordinatı waypoint'le değiştiriyoruz bunun için.
 enemy_group.add(enemy)
 
 print(enemy)
