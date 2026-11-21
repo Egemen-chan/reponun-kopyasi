@@ -28,11 +28,14 @@ class Enemy(pg.sprite.Sprite): #burada enemy class'ımızı tanımlıyoruz, ayr�
         if dist >= self.speed: #bu normalde olması gereken koşulumuz. dolayısıyla normal hareketimizi bunun içine attık.
             self.pos += self.movement.normalize() * self.speed #adım büyüklüğünü speed'le çarptık ki o hızda gitsin.
         else:
-            self.pos += self.movement.normalize() * dist #eğer adımdan az kaldıysa direkt distance'ı gideceği şekilde kodladık.
+            if dist != 0:
+                #eğer bu if satırını eklemeseydik bu sefer de ikinci kez yolun sonuna geldiğimizde valueerror yiyecektik.
+                self.pos += self.movement.normalize() * dist #eğer adımdan az kaldıysa direkt distance'ın kendisi kadar gideceği şekilde kodladık.
+            #şimdi çizgi sonuna gelmiş enemy'mizin targetini diğer waypoint yapıyoruz.
+            self.target_waypoint += 1
         self.rect.center = self.pos #self.rect'i de güncellemiş olduk.
         #artık enemy ekranın bir ucundan diğerine gitmeyeceği için x += 1 kısmını sildik. sorry Egemen :D 
-    #kodu bu haliyle çalıştırınca sonuna kadar gidip sona ulaşınca valueerror verip kapanıyor.
-    #valueerror'un sebebi sona ulaşınca dist'in 0 olması, 0 değerli bir şeyin üzerinde de normalize methodunun kullanılamaması.
+   
 
     def update(self): #burada update diye bir method ekledim, hareket methodunu çağırmak için kullanılıyor
         self.move()
