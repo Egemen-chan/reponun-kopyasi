@@ -7,4 +7,3 @@ class World():
 
   def draw(self, surface):
     surface.blit(self.image, (0,0))
-    
