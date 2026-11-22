@@ -1,6 +1,8 @@
 import pygame as pg # wrote as pg so that whenever we need to call a pygame func., we can js write pg
 from enemies import Enemy
+from world import World
 import os
+
 
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,6 +22,8 @@ pg.display.set_caption("Tower Defense")
 map_image =   pg.image.load("levels/level_map.png").convert_alpha() 
 enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha() #bunun amacı enemy oluşturduğumuz zaman ekrana vereceğimiz image'ı koda tanıtmak
 
+#create world ^-^
+world = World(map_image)
 #burada group üretiyoruz enemyler için
 enemy_group = pg.sprite.Group()
 
@@ -42,9 +46,12 @@ print(enemy)
 run = True
 while run:  #as long as the run variable is true, the code will keep executing itself in a loop. brief moment --> forever
     clock.tick(60)
-
+    
     #burada arkaplan rengi ekledim, bir de bu olmazsa karakter hareket ettikçe eski halleri ekranı kaplıyor >~<
     screen.fill("goldenrod4")
+
+    #draw level
+    world.draw(screen)
 
     #draw enemy path
     pg.draw.lines(screen, "grey0", False, waypoints) #nereye çizdiğimiz, rengi, son argüman waypoints listesini çiziyor oluşumuz.
