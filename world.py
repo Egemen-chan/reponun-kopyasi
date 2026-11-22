@@ -11,7 +11,12 @@ class World():
       if layer["name"] == "waypoints":
         for obj in layer["objects"]:
           waypoint_data = obj["polyline"]
-          print(waypoint_data)
+          self.process_waypoints(waypoint_data)
+
+  def process_waypoints(self, data):
+    #iterate through waypoints to extract coordinates
+    for point in data:
+      print(point)
           
   def draw(self, surface):
     surface.blit(self.image, (0,0))
