@@ -5,5 +5,10 @@ class World():
     self.level_data = data
     self.image = map_image
 
+  def process_data(self):
+    #datayı inceleyecek olan method
+    for layer in self.level_data["layers"]:
+      if layer["name"] == "waypoints":
+        print(layer)
   def draw(self, surface):
     surface.blit(self.image, (0,0))
