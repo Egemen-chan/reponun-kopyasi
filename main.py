@@ -29,6 +29,7 @@ with open("levels/level.tmj") as file:
 
 #create world ^-^
 world = World(world_data , map_image)
+world.process_data()
 #burada group üretiyoruz enemyler için
 enemy_group = pg.sprite.Group()
 
