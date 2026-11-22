@@ -33,18 +33,10 @@ world.process_data()
 #burada group üretiyoruz enemyler için
 enemy_group = pg.sprite.Group()
 
-#şimdi waypointler için bir liste oluşturuyoruz. içerisinde koordinat tuple'ları olan bir liste oluyor bu.
-waypoints = [
-    (100,100),
-    (400,200),
-    (400,100),
-    (200,300),
-] #waypoint'leri visualiselamak için ekrana çizeceğiz sanırım.
-
 #ilk enemy'i yaptık ve onu enemy_group grubuna ekledik
 
 #şimdi artık enemy'lerimizin oluşturduğumuz waypoint'leri takip etmelerini sağlamamız lazım.
-enemy = Enemy(waypoints, enemy_image) #manuel olarak yazdığımız koordinatı waypoint'le değiştiriyoruz bunun için.
+enemy = Enemy(world.waypoints, enemy_image) #manuel olarak yazdığımız koordinatı waypoint'le değiştiriyoruz bunun için.
 enemy_group.add(enemy)
 
 print(enemy)
@@ -60,7 +52,7 @@ while run:  #as long as the run variable is true, the code will keep executing i
     world.draw(screen)
 
     #draw enemy path
-    pg.draw.lines(screen, "grey0", False, waypoints) #nereye çizdiğimiz, rengi, son argüman waypoints listesini çiziyor oluşumuz.
+    pg.draw.lines(screen, "grey0", False, world.waypoints) #nereye çizdiğimiz, rengi, son argüman waypoints listesini çiziyor oluşumuz.
     # (üçüncü argüman da içi kapalı bir şekil olup olmadığını soruyor.  çizgi olduğu için False.)
     
     #artık bütün düşmanları hareket ettirecek method ile hareketi sağlayabiliriz ^_^
