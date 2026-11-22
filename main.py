@@ -25,10 +25,10 @@ enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha() #bunun
 #load json data for level UwU
 with open("levels/level.tmj") as file:
     world_data = json.load(file)
-print(world_data)
+
 
 #create world ^-^
-world = World(map_image)
+world = World(world_data , map_image)
 #burada group üretiyoruz enemyler için
 enemy_group = pg.sprite.Group()
 
