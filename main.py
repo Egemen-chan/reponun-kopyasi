@@ -1,4 +1,5 @@
 import pygame as pg # wrote as pg so that whenever we need to call a pygame func., we can js write pg
+import json
 from enemies import Enemy
 from world import World
 import os
@@ -21,6 +22,10 @@ pg.display.set_caption("Tower Defense")
 #load images
 map_image =   pg.image.load("levels/level_map.png").convert_alpha() 
 enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha() #bunun amacı enemy oluşturduğumuz zaman ekrana vereceğimiz image'ı koda tanıtmak
+#load json data for level UwU
+with open("levels/level.tmj") as file:
+    world_data = json.load(file)
+print(world_data)
 
 #create world ^-^
 world = World(map_image)
