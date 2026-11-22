@@ -16,6 +16,8 @@ screen = pg.display.set_mode((500,500))
 #then we change the name of our window
 pg.display.set_caption("Tower Defense")
 
+#load images
+map_image =   pg.image.load("levels/level_map.png").convert_alpha() 
 enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha() #bunun amacı enemy oluşturduğumuz zaman ekrana vereceğimiz image'ı koda tanıtmak
 
 #burada group üretiyoruz enemyler için
