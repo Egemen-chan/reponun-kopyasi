@@ -57,7 +57,7 @@
         {
          "draworder":"topdown",
          "id":3,
-         "name":"Nesne Katman\u0131 1",
+         "name":"waypoints",
          "objects":[
                 {
                  "height":0,
