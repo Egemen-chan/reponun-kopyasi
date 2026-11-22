@@ -16,7 +16,9 @@ class World():
   def process_waypoints(self, data):
     #iterate through waypoints to extract coordinates
     for point in data:
-      print(point)
-          
+      temp_x = point.get("x")
+      temp_y = point.get("y")
+      print((temp_x, temp_y))
+    
   def draw(self, surface):
     surface.blit(self.image, (0,0))
