@@ -1,5 +1,6 @@
 import pygame as pg # wrote as pg so that whenever we need to call a pygame func., we can js write pg
 import json
+from turret import Turret
 from enemies import Enemy
 from world import World
 import os
@@ -22,16 +23,26 @@ pg.display.set_caption("Tower Defense")
 #load images
 map_image =   pg.image.load("levels/level_map.png").convert_alpha() 
 enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha() #bunun amacı enemy oluşturduğumuz zaman ekrana vereceğimiz image'ı koda tanıtmak
+cursor_turret = pg.image.load("assets/turrets/cursor_turret.png").convert_alpha() #bu kodla turret koyacağımız zamanki cursor image'ı programa ekledik
 #load json data for level UwU
 with open("levels/level.tmj") as file:
     world_data = json.load(file)
 
+#esasında bu fonksiyon ile oyunumuzun tile game olmasını sağlıyoruz
+#Turret class'ının özelliklerini de kullanarak turret'ların istediğimiz her yere değil her 64 pixele bir koyulmasını sağlıyoruz
+#önce 64'e bölüp sonra da kalanını alıp 64'le çarpınca küsuratları gidiyor bu sayede her 64 pixelde bir oluyor
+def create_turret(mouse_pos):
+    mouse_tile_x = mouse_pos[0] // 64
+    mouse_tile_y = mouse_pos[1] // 64
+    turret = Turret(cursor_turret, mouse_tile_x, mouse_tile_y)
+    turret_group.add(turret)
 
 #create world ^-^
 world = World(world_data , map_image)
 world.process_data()
-#burada group üretiyoruz enemyler için
+#burada group üretiyoruz enemyler ve turretler için
 enemy_group = pg.sprite.Group()
+turret_group = pg.sprite.Group()
 
 #ilk enemy'i yaptık ve onu enemy_group grubuna ekledik
 
@@ -60,17 +71,24 @@ while run:  #as long as the run variable is true, the code will keep executing i
     
     #enemyleri ekrana yansıtıyoruz burada artık :3
     enemy_group.draw(screen)
+    turret_group.draw(screen)
     
     # to keep the loop from being stuck in forever, we use an event handler.
     for event in pg.event.get():
         #quit program
         if event.type == pg.QUIT:
             run = False #now, whenever we press x the window can be closed. it won't stay open forever and ever. 
+
+        if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+            mouse_pos = pg.mouse.get_pos()
+            #turret koyduğumuz yer oyun ekranının içinde mi onu kontrol ediyor, içindeyse turret yerleştiriyor ^w^
+            if mouse_pos[0]<960 and mouse_pos[1]<960:
+                create_turret(mouse_pos)
             
+
     pg.display.flip() #güncellemeleri ekranda gösteriyoruz  
     
 pg.quit() #bunu neden yaptığımızı anlamadım, bu satırı yazmadan önce de pencere açılıyordu ve kapat deyince kapanıyordu? :PP
 
 #next thing we need to do is limiting the framerate, meaning it should run at 
 #the same speed no matter how powerful the computer is. so we go under the first init to create a clock.
-
