@@ -6,8 +6,8 @@ class Turret(pg.sprite.Sprite):
         self.tile_x = tile_x
         self.tile_y = tile_y
         #calculates the center coordinates
-        self.x = self.tile_x * 64
-        self.y = self.tile_y * 64
+        self.x = (self.tile_x * 64) + 32
+        self.y = (self.tile_y * 64) + 32
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.center = (self.x, self.y)
