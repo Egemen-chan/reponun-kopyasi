@@ -28,18 +28,27 @@ cursor_turret = pg.image.load("assets/turrets/cursor_turret.png").convert_alpha(
 with open("levels/level.tmj") as file:
     world_data = json.load(file)
 
+#create world ^-^
+world = World(world_data , map_image)
+world.process_data()
+
 #esasında bu fonksiyon ile oyunumuzun tile game olmasını sağlıyoruz
 #Turret class'ının özelliklerini de kullanarak turret'ların istediğimiz her yere değil her 64 pixele bir koyulmasını sağlıyoruz
 #önce 64'e bölüp sonra da kalanını alıp 64'le çarpınca küsuratları gidiyor bu sayede her 64 pixelde bir oluyor
 def create_turret(mouse_pos):
     mouse_tile_x = mouse_pos[0] // 64
     mouse_tile_y = mouse_pos[1] // 64
-    turret = Turret(cursor_turret, mouse_tile_x, mouse_tile_y)
-    turret_group.add(turret)
+    mouse_tile_num = (mouse_tile_y * 15) + mouse_tile_x #burada böyle bir şekilde yazmamızın sebebi JSON formatı böyle koordinat kaydediyormuş
+    if world.map_tiles[mouse_tile_num] == 25: #eğer kullanacağımız tile sadece çimenin olduğu bir tile'sa bir sonraki check'e geçeriz
+        #burada turret koyduğumuz yer boş mu onu kontrol ediyor boşsa koyuyor
+        space_is_free = True
+        for turret in turret_group:
+             if (mouse_tile_x, mouse_tile_y) == (turret.tile_x, turret.tile_y):
+                  space_is_free = False
+        if space_is_free == True:
+            new_turret = Turret(cursor_turret, mouse_tile_x, mouse_tile_y) #burada new_turret dedim çok fazla turret'lı değişken vardı çünkü
+            turret_group.add(new_turret)
 
-#create world ^-^
-world = World(world_data , map_image)
-world.process_data()
 #burada group üretiyoruz enemyler ve turretler için
 enemy_group = pg.sprite.Group()
 turret_group = pg.sprite.Group()
@@ -65,7 +74,7 @@ while run:  #as long as the run variable is true, the code will keep executing i
     #draw enemy path
     pg.draw.lines(screen, "grey0", False, world.waypoints) #nereye çizdiğimiz, rengi, son argüman waypoints listesini çiziyor oluşumuz.
     # (üçüncü argüman da içi kapalı bir şekil olup olmadığını soruyor.  çizgi olduğu için False.)
-    
+
     #artık bütün düşmanları hareket ettirecek method ile hareketi sağlayabiliriz ^_^
     enemy_group.update()
     
@@ -83,7 +92,7 @@ while run:  #as long as the run variable is true, the code will keep executing i
             mouse_pos = pg.mouse.get_pos()
             #turret koyduğumuz yer oyun ekranının içinde mi onu kontrol ediyor, içindeyse turret yerleştiriyor ^w^
             if mouse_pos[0]<960 and mouse_pos[1]<960:
-                create_turret(mouse_pos)
+                    create_turret(mouse_pos)
             
 
     pg.display.flip() #güncellemeleri ekranda gösteriyoruz  
