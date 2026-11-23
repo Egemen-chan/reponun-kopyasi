@@ -2,6 +2,7 @@ import pygame as pg
 
 class World():
   def __init__(self, data, map_image):
+    self.map_tiles = []
     self.waypoints = []
     self.level_data = data
     self.image = map_image
@@ -9,7 +10,9 @@ class World():
   def process_data(self):
     #datayı inceleyecek olan method
     for layer in self.level_data["layers"]:
-      if layer["name"] == "waypoints":
+      if layer["name"] == "Desen Katman\u0131 1": #burada tareti koyacağımız tile'ın property'lerini alıyoruz, json dosyamızda 64x64'lük alandaki her pixel'i yeşil olan tile'lar 25 değeri alıyordu, tareti onlara yapacağız
+        self.map_tiles = layer["data"] #burada da o tile değerlerini kaydettik ileride check'lerde kullanmak için
+      elif layer["name"] == "waypoints":
         for obj in layer["objects"]:
           waypoint_data = obj["polyline"]
           self.process_waypoints(waypoint_data)
