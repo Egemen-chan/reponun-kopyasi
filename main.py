@@ -14,7 +14,7 @@ pg.init() # we are initializing the module here
 clock = pg.time.Clock() #now we put this under the main loop of our game.
 
 #now we need to open a window, so we assign it to a variable
-screen = pg.display.set_mode((960,960))
+screen = pg.display.set_mode((300+960,960)) #butonları ekleyebilmek için oyun ekranını büyüttük. 1260 yazmaya usendim
 #unless we tell the code to keep the window open, running this code will only cause a momentary pop-up of our window.
 #so we create a loop in order to keep our window open.
 #then we change the name of our window
