@@ -65,8 +65,11 @@ enemy_group = pg.sprite.Group()
 turret_group = pg.sprite.Group()
 
 #şimdi oyunumuzun içerisinde oluşturuyoruz button'ları ^v^
-turret_button = Button(960+30, 120, buy_turret_image) #bu kısım tutorialdan birazcik farklı, direkt png
-cancel_button = Button(960+50, 180, cancel_image) #dosyasının adını verince kodumuz nedense tanımıyor çünkü </3
+turret_button = Button(960+30, 120, buy_turret_image, True) #bu kısım tutorialdan birazcik farklı, direkt png
+cancel_button = Button(960+50, 180, cancel_image, False) #dosyasının adını verince kodumuz nedense tanımıyor çünkü </3
+#class'ımıza tek tıklanabilme argümanı eklemiştik. instance'larımızı da güncelledik.
+#cancel butonunu basılı tutulabilir yapmaya çok meraklı for some reason
+#bu kodu şu haliyle çalıştırınca turret'in normal çalışması, cancel'a basılı tuttuğun sürece de sana sonuç bastırması lazım.
 
 
 #şimdi artık enemy'lerimizin oluşturduğumuz waypoint'leri takip etmelerini sağlamamız lazım.
@@ -92,7 +95,7 @@ while run:  #as long as the run variable is true, the code will keep executing i
     #artık bu değişkenin varlığını kontrol eden if blokları içerisinde de kullanabiliyoruz draw methodlarımızı.
     #yani sanırım hem butonu ekrana çiziyor hem de kendi içerisinde butona tıklanıp tıklanmadığına bakıyor ve ona göre bir value döndürüyor artık bu method.
     #biz de bunu kullanabiliyoruz. hayat gülünce fr çok güzel
-    if turret_button.draw(screen): #FUUUUUUUUUUUUUCKKKKKK
+    if turret_button.draw(screen): #hallettim sorun yok.
         print("new turret")
     if cancel_button.draw(screen):
         print("cancel")
