@@ -71,9 +71,7 @@ while run:  #as long as the run variable is true, the code will keep executing i
     #draw level
     world.draw(screen)
 
-    #draw enemy path
-    pg.draw.lines(screen, "grey0", False, world.waypoints) #nereye çizdiğimiz, rengi, son argüman waypoints listesini çiziyor oluşumuz.
-    # (üçüncü argüman da içi kapalı bir şekil olup olmadığını soruyor.  çizgi olduğu için False.)
+    #enemy'nin takip edeceği yolu artık ekrana çizmemiz gerekmediği için sildim :pp
 
     #artık bütün düşmanları hareket ettirecek method ile hareketi sağlayabiliriz ^_^
     enemy_group.update()
