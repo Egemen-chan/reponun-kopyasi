@@ -88,9 +88,16 @@ while run:  #as long as the run variable is true, the code will keep executing i
     #draw level
     world.draw(screen)
 
-    #şimdiiii buttonları ekrana çizebiliriz SONUNDA UMARIM 
-    turret_button.draw(screen) #WOOOOOOOOOOOOO İŞE YARADI
-    cancel_button.draw(screen)
+    #şimdiiii buttonları ekrana çizebiliriz 
+    #button'larımızın draw method'larının içerisine sonunda returnlediğimiz boolean bir değişken eklediğimiz için
+    #artık bu değişkenin varlığını kontrol eden if blokları içerisinde de kullanabiliyoruz draw methodlarımızı.
+    #yani sanırım hem butonu ekrana çiziyor hem de kendi içerisinde butona tıklanıp tıklanmadığına bakıyor ve ona göre bir value döndürüyor artık bu method.
+    #biz de bunu kullanabiliyoruz. hayat gülünce fr çok güzel
+    if turret_button.draw(screen):
+        print("new turret")
+    if cancel_button.draw(screen):
+        print("cancel")
+    #sondaki printler butona basma durumumuza göre programa bir şeyler yaptırma işini becerdik mi kontrol etmek için. doğru çalışırsa terminale basmalı
 
     #enemy'nin takip edeceği yolu artık ekrana çizmemiz gerekmediği için sildim :pp
 
