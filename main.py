@@ -26,9 +26,14 @@ pg.display.set_caption("Tower Defense")
 map_image =   pg.image.load("levels/level_map.png").convert_alpha() 
 enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha() #bunun amacı enemy oluşturduğumuz zaman ekrana vereceğimiz image'ı koda tanıtmak
 cursor_turret = pg.image.load("assets/turrets/cursor_turret.png").convert_alpha() #bu kodla turret koyacağımız zamanki cursor image'ı programa ekledik
-#düğmelerin görsellerini ekliyorum :3
-buy_turret_image = pg.image.load("assets/buttons/buy_turret.png").convert_alpha()
-cancel_image = pg.image.load("assets/buttons/cancel.png").convert_alpha()
+
+#düğmelerin görsellerini eklerken error vermemesi için tutorialdakinden biraz daha farklı bir kod kullanıcam burada
+#error düzeltmeye çalışıyorum burada
+script_dir = os.path.dirname(os.path.abspath(__file__))
+image_path = os.path.join(script_dir, "assets", "buttons", "buy_turret.png")
+other_image_path = os.path.join(script_dir, "assets", "buttons", "cancel.png")
+buy_turret_image = pg.image.load(image_path).convert_alpha()
+cancel_image = pg.image.load(other_image_path).convert_alpha()
 
 
 #load json data for level UwU
@@ -61,10 +66,9 @@ enemy_group = pg.sprite.Group()
 turret_group = pg.sprite.Group()
 
 #şimdi oyunumuzun içerisinde oluşturuyoruz button'ları ^v^
-turret_button = Button(960+30, 120, buy_turret.png)
-cancel_button = Button(960+50, 180, cancel.png) 
+turret_button = Button(960+30, 120, buy_turret_image) #bu kısım tutorialdan birazcik farklı, direkt png
+cancel_button = Button(960+50, 180, cancel_image) #dosyasının adını verince kodumuz nedense tanımıyor çünkü </3
 
-#ilk enemy'i yaptık ve onu enemy_group grubuna ekledik
 
 #şimdi artık enemy'lerimizin oluşturduğumuz waypoint'leri takip etmelerini sağlamamız lazım.
 enemy = Enemy(world.waypoints, enemy_image) #manuel olarak yazdığımız koordinatı waypoint'le değiştiriyoruz bunun için.
@@ -75,12 +79,18 @@ print(enemy)
 run = True
 while run:  #as long as the run variable is true, the code will keep executing itself in a loop. brief moment --> forever
     clock.tick(60)
+    #burada enemy update kısmını üste aldı ama çok da fark etmiyor imo. 
+    #im from tel aviv and this is my kod düzeni
     
     #burada arkaplan rengi ekledim, bir de bu olmazsa karakter hareket ettikçe eski halleri ekranı kaplıyor >~<
     screen.fill("goldenrod4")
 
     #draw level
     world.draw(screen)
+
+    #şimdiiii buttonları ekrana çizebiliriz SONUNDA UMARIM 
+    turret_button.draw(screen) #WOOOOOOOOOOOOO İŞE YARADI
+    cancel_button.draw(screen)
 
     #enemy'nin takip edeceği yolu artık ekrana çizmemiz gerekmediği için sildim :pp
 
