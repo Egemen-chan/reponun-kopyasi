@@ -7,7 +7,6 @@ from button import Button
 import os
 
 
-
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 
 pg.init() # we are initializing the module here
@@ -93,7 +92,7 @@ while run:  #as long as the run variable is true, the code will keep executing i
     #artık bu değişkenin varlığını kontrol eden if blokları içerisinde de kullanabiliyoruz draw methodlarımızı.
     #yani sanırım hem butonu ekrana çiziyor hem de kendi içerisinde butona tıklanıp tıklanmadığına bakıyor ve ona göre bir value döndürüyor artık bu method.
     #biz de bunu kullanabiliyoruz. hayat gülünce fr çok güzel
-    if turret_button.draw(screen):
+    if turret_button.draw(screen): #FUUUUUUUUUUUUUCKKKKKK
         print("new turret")
     if cancel_button.draw(screen):
         print("cancel")
