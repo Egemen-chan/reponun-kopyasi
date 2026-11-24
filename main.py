@@ -26,7 +26,7 @@ enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha() #bunun
 cursor_turret = pg.image.load("assets/turrets/cursor_turret.png").convert_alpha() #bu kodla turret koyacağımız zamanki cursor image'ı programa ekledik
 #düğmelerin görsellerini ekliyorum :3
 buy_turret_image = pg.image.load("assets/buttons/buy_turret.png").convert_alpha()
-cancel_image = pg.image.load("asstes/buttons/cancel.png").convert_alpha()
+cancel_image = pg.image.load("assets/buttons/cancel.png").convert_alpha()
 
 
 #load json data for level UwU
