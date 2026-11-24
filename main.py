@@ -21,6 +21,10 @@ screen = pg.display.set_mode((300+960,960)) #butonları ekleyebilmek için oyun 
 #then we change the name of our window
 pg.display.set_caption("Tower Defense")
 
+#game mi variables
+placing_turrets = False #o esnada turret konumlandırıyor olup olmadığımıza bakan variable.
+
+
 #load images
 map_image =   pg.image.load("levels/level_map.png").convert_alpha() 
 enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha() #bunun amacı enemy oluşturduğumuz zaman ekrana vereceğimiz image'ı koda tanıtmak
@@ -66,10 +70,9 @@ turret_group = pg.sprite.Group()
 
 #şimdi oyunumuzun içerisinde oluşturuyoruz button'ları ^v^
 turret_button = Button(960+30, 120, buy_turret_image, True) #bu kısım tutorialdan birazcik farklı, direkt png
-cancel_button = Button(960+50, 180, cancel_image, False) #dosyasının adını verince kodumuz nedense tanımıyor çünkü </3
+cancel_button = Button(960+50, 180, cancel_image, True) #dosyasının adını verince kodumuz nedense tanımıyor çünkü </3
 #class'ımıza tek tıklanabilme argümanı eklemiştik. instance'larımızı da güncelledik.
-#cancel butonunu basılı tutulabilir yapmaya çok meraklı for some reason
-#bu kodu şu haliyle çalıştırınca turret'in normal çalışması, cancel'a basılı tuttuğun sürece de sana sonuç bastırması lazım.
+
 
 
 #şimdi artık enemy'lerimizin oluşturduğumuz waypoint'leri takip etmelerini sağlamamız lazım.
@@ -96,9 +99,11 @@ while run:  #as long as the run variable is true, the code will keep executing i
     #yani sanırım hem butonu ekrana çiziyor hem de kendi içerisinde butona tıklanıp tıklanmadığına bakıyor ve ona göre bir value döndürüyor artık bu method.
     #biz de bunu kullanabiliyoruz. hayat gülünce fr çok güzel
     if turret_button.draw(screen): #hallettim sorun yok.
-        print("new turret")
-    if cancel_button.draw(screen):
-        print("cancel")
+        placing_turret = True #artık printlemiyoruz turret yerleştirme değişkenini true yapıyoruz.
+    #if placing turrets, then show cancel button as well. cancel yalnızca turret placelemeye çalışırken belirmesi gereken bir buton.
+    if placing_turrets == True:
+        if cancel_button.draw(screen):
+            placing_turrets = False #artık printlemiyoruz, değişkenimizi false yapıyoruz.
     #sondaki printler butona basma durumumuza göre programa bir şeyler yaptırma işini becerdik mi kontrol etmek için. doğru çalışırsa terminale basmalı
 
     #enemy'nin takip edeceği yolu artık ekrana çizmemiz gerekmediği için sildim :pp
