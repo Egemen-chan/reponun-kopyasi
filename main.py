@@ -24,6 +24,11 @@ pg.display.set_caption("Tower Defense")
 map_image =   pg.image.load("levels/level_map.png").convert_alpha() 
 enemy_image = pg.image.load('assets/enemies/enemy_1.png').convert_alpha() #bunun amacı enemy oluşturduğumuz zaman ekrana vereceğimiz image'ı koda tanıtmak
 cursor_turret = pg.image.load("assets/turrets/cursor_turret.png").convert_alpha() #bu kodla turret koyacağımız zamanki cursor image'ı programa ekledik
+#düğmelerin görsellerini ekliyorum :3
+buy_turret_image = pg.image.load("assets/buttons/buy_turret.png").convert_alpha()
+cancel_image = pg.image.load("asstes/buttons/cancel.png").convert_alpha()
+
+
 #load json data for level UwU
 with open("levels/level.tmj") as file:
     world_data = json.load(file)
