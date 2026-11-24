@@ -99,7 +99,7 @@ while run:  #as long as the run variable is true, the code will keep executing i
     #yani sanırım hem butonu ekrana çiziyor hem de kendi içerisinde butona tıklanıp tıklanmadığına bakıyor ve ona göre bir value döndürüyor artık bu method.
     #biz de bunu kullanabiliyoruz. hayat gülünce fr çok güzel
     if turret_button.draw(screen): #hallettim sorun yok.
-        placing_turret = True #artık printlemiyoruz turret yerleştirme değişkenini true yapıyoruz.
+        placing_turrets = True #artık printlemiyoruz turret yerleştirme değişkenini true yapıyoruz.
     #if placing turrets, then show cancel button as well. cancel yalnızca turret placelemeye çalışırken belirmesi gereken bir buton.
     if placing_turrets == True:
         if cancel_button.draw(screen):
