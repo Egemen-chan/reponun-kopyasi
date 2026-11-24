@@ -24,6 +24,9 @@ class Button():
         #burada ayrıca tıklamanın bir kez gerçekleşip gerçekleşmediğine bakıyoruz.
         action = True #artık bu koşulumuz sağlandığında defaultta false olan değişkenimiz true oluyor.
         self.clicked = True #tıklayınca clicked'i de true yapmış oluyoruz böylece. bu değişkenimiz tıklanınca olacak olayın sonsuza kadar olmamasını sağlayacak.
+    #ama şimdi de birden fazla kez tıklasak da sadece bir sefer sonuç alabiliyoruz, çünkü self.clicked geri 0 olmuyor. onu düzeltelim.
+    if pg.mouse.get_pressed()[0] == 0:
+      self.clicked = False #artık tek tıklamalık tuşlarımız tamamen hazır!
     #draw button on screen. crazy i know
     surface.blit(self.image, self.rect) #ekrana çizdirecek metodu oluşturduk.
     return action #variable'ımızı çağırdık.
