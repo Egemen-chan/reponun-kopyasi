@@ -3,6 +3,7 @@ import json
 from turret import Turret
 from enemies import Enemy
 from world import World
+from button import Button
 import os
 
 
@@ -57,6 +58,10 @@ def create_turret(mouse_pos):
 #burada group üretiyoruz enemyler ve turretler için
 enemy_group = pg.sprite.Group()
 turret_group = pg.sprite.Group()
+
+#şimdi oyunumuzun içerisinde oluşturuyoruz button'ları ^v^
+turret_button = Button(960+30, 120, buy_turret.png)
+cancel_button = Button(960+50, 180, cancel.png) 
 
 #ilk enemy'i yaptık ve onu enemy_group grubuna ekledik
 
