@@ -1,10 +1,15 @@
 import pygame as pg
-
+#şimdi artık tuşlarımızı hem tek kez tıklanabilir hem basılı tutulabilir farklı farklı tuşlar
+#olarak yazmak istiyoruz. 
+#ilk başta single click yapıcaz hepsini (şu anda biraz daha garip bir şey. maindeki print testini çalıştırınca sonsuza kadar çalışıyordu)
+#sonra basılı tutarak tıklama özelliğini de eklicez.
 class Button():
   def __init__(self, x, y, image):
     self.image = image
     self.rect = self.image.get_rect()
     self.rect.topleft = (x, y) #kullandığımız x ve y verilerini buttonun sol üst köşesi olarak belirledik. bu yüzden ismini böyle koyduk
+    self.clicked = False #oluşturduğumuz tıklanmış olma değişkeni, tuş oluşturulduğu andan itibaren false.
+    #bu sanırım action'dan şöyle farklı, action tıklanma karşılığında harekete geçiyor olma durumu. buysa direkt tıklanıp tıklanmamanın kendisi.
 
   def draw(self, surface):
     #şimdi tuşlarımızı tıklanabilir kılmaya geldi sıra. bunuun için tuşa tıklanma durumuna bakan bir değişken oluşturuyoruz.
@@ -15,8 +20,10 @@ class Button():
     
     #check mouseover and clicked conditions (he said that the button was a rectangle, so we could simply check for collision.)
     if self.rect.collidepoint(pos): #she was coding something :pp. bu, mouse'un buttonun üzerinde geziniyor olma durumunu kontrol ediyor.
-      if pg.mouse.get_pressed()[0] == 1: #mouse'umuzun tıklama durumuna bakıyoruz. [0]'ın olayı sadece sol tıklama kabul etmek
+      if pg.mouse.get_pressed()[0] == 1 and self.clicked == False : #0'ın olayı sadece sol tıklama kabul etmek. 
+        #burada ayrıca tıklamanın bir kez gerçekleşip gerçekleşmediğine bakıyoruz.
         action = True #artık bu koşulumuz sağlandığında defaultta false olan değişkenimiz true oluyor.
+        self.clicked = True #tıklayınca clicked'i de true yapmış oluyoruz böylece. bu değişkenimiz tıklanınca olacak olayın sonsuza kadar olmamasını sağlayacak.
     #draw button on screen. crazy i know
     surface.blit(self.image, self.rect) #ekrana çizdirecek metodu oluşturduk.
     return action #variable'ımızı çağırdık.
